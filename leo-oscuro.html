@@ -1,11 +1,145 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>IMC </title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
 </head>
+
 <body>
-    
+
+    <div id="app" class="animated fadeInUp" v-cloak>
+        <div class="container">
+
+            <div id="row-title" class="row">
+                <div class="col">
+                    <h1>IMC calculateur</h1>
+                    <hr>
+                    <h4>Calcule facilement ton indice de masse corporel</h4>
+                </div>
+            </div>
+
+            <div id="row-input" class="row">
+                <div class="col">
+                    <form>
+                        <div class="form-group">
+                            <b-input-group prepend="Poids">
+                                <b-form-input v-if="PoidsSelected == 'kg'" v-model.number="Poids" type="number" min=0
+                                    step="any" size="lg"></b-form-input>
+                                <b-input-group-append>
+                                    <div class="unite">
+                                        kg
+                                    </div>
+                                </b-input-group-append>
+                            </b-input-group>
+                        </div>
+                        <div class="form-group">
+                            <b-input-group prepend="Taille">
+                                <b-form-input v-if="TailleSelected !== 'us'" v-model.number="Taille" type="number" min=0
+                                    step="any" size="lg"></b-form-input>
+                                <b-input-group-append>
+                                    <div class="unite">
+                                        cm
+                                    </div>
+                                </b-input-group-append>
+                            </b-input-group>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="row-result" class="row gradient-main">
+            <div class="col">
+                <span class="title">
+                    Ton IMC est :
+                </span><br>
+                <span class="group">
+                    {{ PoidsGroup }}
+                </span>
+            </div>
+            <div class="col IMC">
+                {{ IMC }}
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                Poids: 75,
+                PoidsSelected: 'kg',
+                PoidsOptions: [
+                    { value: 'kg', text: 'kg' },
+                ],
+                Taille: 180,
+                TailleSelected: 'cm',
+                TailleOptions: [
+                    { value: 'cm', text: 'cm' },
+                ]
+            },
+            computed: {
+                IMC() {
+                    return round(calculateIMC(this.Poids, this.Taille), 1);
+                },
+                PoidsGroup() {
+                    return getPoidsGroup(this.IMC);
+                }
+            },
+           
+        });
+
+        function round(value, precision) {
+            return Number(Math.round(value + 'e' + precision) + 'e-' + precision);
+        }
+
+        function calculateIMC(kg, cm) {
+            var m = cm / 100;
+            if (kg > 0 && m > 0) {
+                return kg / Math.pow(m, 2);
+            } else {
+                return 0;
+            }
+        }
+        function getPoidsGroup(IMC) {
+            if (IMC == 0) {
+                return "";
+            } else if (IMC < 15) {
+                return "Insuffisance pondérale très grave";
+            } else if (IMC >= 15 && IMC < 16) {
+                return "Insuffisance pondérale grave";
+            } else if (IMC >= 16 && IMC < 18.5) {
+                return "Insuffisance pondérale";
+            } else if (IMC >= 18.5 && IMC < 25) {
+                return "Poids de forme";
+            } else if (IMC >= 25 && IMC < 30) {
+                return "Surpoids";
+            } else if (IMC >= 30 && IMC < 35) {
+                return "Obésité modérée";
+            } else if (IMC >= 35 && IMC < 40) {
+                return "Obésité sévère";
+            } else if (IMC > 40) {
+                return "Obésité morbide ou massive";
+            }
+        }
+    </script>
+
 </body>
+
 </html>
