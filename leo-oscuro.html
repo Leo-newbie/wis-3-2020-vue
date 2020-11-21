@@ -3,10 +3,9 @@
 
 <head>
 
-    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>IMC </title>
+    <title>Calcul ton IMC</title>
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -35,6 +34,7 @@
             <div id="row-input" class="row">
                 <div class="col">
                     <form>
+                        <!--qu'est ce que step="any"-->
                         <div class="form-group">
                             <b-input-group prepend="Poids">
                                 <b-form-input v-if="PoidsSelected == 'kg'" v-model.number="Poids" type="number" min=0
@@ -46,6 +46,7 @@
                                 </b-input-group-append>
                             </b-input-group>
                         </div>
+                        <!--qu'est ce que step="any"-->
                         <div class="form-group">
                             <b-input-group prepend="Taille">
                                 <b-form-input v-if="TailleSelected !== 'us'" v-model.number="Taille" type="number" min=0
@@ -128,7 +129,7 @@
             } else if (IMC >= 16 && IMC < 18.5) {
                 return "Insuffisance pondérale";
             } else if (IMC >= 18.5 && IMC < 25) {
-                return "Poids de forme";
+                return "Corpulence normale";
             } else if (IMC >= 25 && IMC < 30) {
                 return "Surpoids";
             } else if (IMC >= 30 && IMC < 35) {
