@@ -1,5 +1,5 @@
 
-/*image de fond*/
+/* background image */
 body {
     color:black;
     background-color:white;
@@ -18,33 +18,12 @@ body {
     justify-content: center;
     font-family: 'Poppins';
     font-weight: 400;
-    color: rgb(0, 0, 0);
 }
 
 /* general classes */
 .gradient-main {
     background: -webkit-linear-gradient(to right, #B06AB3, #dc7545);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #B06AB3, #dc7545); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-
-[v-cloak] {display: none !important;}
-/* image de fond */
-
-/* background */
-#background {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-    background: -webkit-linear-gradient(to right, rgba(69,104,220,0.3), rgba(176,106,179,0.3));  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, rgba(69,104,220,0.3), rgba(176,106,179,0.3)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-#background > svg {
-    height: 100vh;
-    position: absolute;
-    right: 0;
 }
 
 /* app window */
@@ -133,66 +112,4 @@ body {
 #row-result .title {
     font-weight: 500;
     font-size: 1.3rem;
-}
-
-/* mobile */
-@media all and (max-width: 575.99px) {
-    
-    /* removing flex from body (moves #app to top */
-    body {
-        display: block;
-    }
-
-    /*  removing border radius & shadow */
-    #app {
-        border-radius: 0;
-        box-shadow: none;
-    }
-    #app > .container {
-        border-radius: 0;
-    }
-    #row-result {
-        border-radius: 0;
-    }
-
-    /* removing extra padding from rows */
-    #app .row {
-        padding-left: 0px;
-        padding-right: 0px;
-    }
-
-    /* adding padding back for results row */
-    #row-result .col {
-        padding-left: 25px;
-        padding-right: 25px;
-    }
-
-    /* making app window flex */
-    #app {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-    }
-    #app > * {
-        flex: 1;
-    }
-    #app > .container {
-        display: flex;
-        flex-direction: column;
-    }
-    #row-title {
-        flex: 1;
-    }
-    #row-input {
-        flex: 1;
-    }
-
-    /* flat background */
-    #background svg {
-        display: none;
-    }
-    #background {
-        background: #AAA8E2;
-    }
-
 }
